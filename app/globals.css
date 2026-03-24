@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+:root {
+  --background: #09090b;
+  --surface: #111116;
+  --surface-border: #1f1f29;
+  --text-primary: #f3f4f6;
+  --text-secondary: #b4b6c0;
+  --text-muted: #8a8d98;
+  --accent: #9ea7ff;
+  --panel: rgba(16, 16, 28, 0.65);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --surface-border: #e7ebf1;
+    --text-primary: #0b1020;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --accent: #3f51f5;
+    --panel: rgba(255, 255, 255, 0.72);
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --color-token-bg: var(--background);
+  --color-token-surface: var(--surface);
+  --color-token-border: var(--surface-border);
+  --color-token-text: var(--text-primary);
+  --color-token-text-secondary: var(--text-secondary);
+  --color-token-text-muted: var(--text-muted);
+  --color-token-accent: var(--accent);
+}
+
+[data-theme="light"] {
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-border: #e7ebf1;
+  --text-primary: #0b1020;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent: #3f51f5;
+  --panel: rgba(255, 255, 255, 0.72);
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+  min-height: 100%;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+.bg-token {
+  background: var(--background);
+}
+
+.text-token {
+  color: var(--text-primary);
+}
+
+.text-token-secondary {
+  color: var(--text-secondary);
+}
+
+.text-token-muted {
+  color: var(--text-muted);
+}
+
+.text-token-accent {
+  color: var(--accent);
+}
+
+.border-token {
+  border-color: var(--surface-border);
+}
+
+.border-token-strong {
+  border-color: color-mix(in oklab, var(--surface-border) 65%, var(--text-primary));
+}
+
+.card {
+  border: 1px solid var(--surface-border);
+  background: color-mix(in oklab, var(--surface) 92%, transparent);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.card-tilt:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--surface-border) 70%, var(--accent));
+  box-shadow: 0 18px 45px -24px color-mix(in oklab, var(--accent) 40%, transparent);
+}
+
+.chip {
+  border: 1px solid var(--surface-border);
+  border-radius: 9999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.65rem 1rem;
+  background: var(--text-primary);
+  color: var(--background);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.94;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px -18px color-mix(in oklab, var(--text-primary) 65%, transparent);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--surface-border);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.btn-secondary:hover {
+  border-color: color-mix(in oklab, var(--surface-border) 65%, var(--text-primary));
+  color: var(--text-primary);
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.bg-ornaments {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 8% 18%, color-mix(in oklab, var(--accent) 30%, transparent), transparent 30%),
+    radial-gradient(circle at 92% 84%, rgba(56, 189, 248, 0.2), transparent 26%),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--background) 92%, transparent),
+      var(--background)
+    );
+}
+
+.bg-ornaments::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      color-mix(in oklab, var(--surface-border) 45%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--surface-border) 45%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 42px 42px;
+  opacity: 0.2;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+}
+
+.hero-title {
+  text-wrap: balance;
+  letter-spacing: -0.03em;
+}
+
+.bg-token-panel {
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+}
+
+.ticker-wrap {
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: 9999px;
+  padding: 0.8rem 0;
+  background: color-mix(in oklab, var(--surface) 84%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 0.85rem;
+  animation: tickerMove 30s linear infinite;
+}
+
+.ticker-item {
+  white-space: nowrap;
+  border: 1px solid color-mix(in oklab, var(--surface-border) 80%, transparent);
+  border-radius: 9999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+}
+
+.project-grid article {
+  opacity: 0;
+  animation: cardIn 520ms ease forwards;
+}
+
+@keyframes tickerMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track,
+  .project-grid article {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .bg-ornaments::after {
+    display: none;
+  }
+
+  .bg-token-panel {
+    backdrop-filter: none;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .ticker-track {
+    animation-duration: 40s;
+  }
+
+  .project-grid article {
+    animation: none;
+    opacity: 1;
+  }
+}
